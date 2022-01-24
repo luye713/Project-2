@@ -1,0 +1,12 @@
+<%- include('../partials/header') %>
+<h1><%= villager.name["name-USen"] %> </h1>
+<img src="<%= villager.image_uri %>" width=300 height=300>
+<ul>
+    <li>Personality: <%= villager.personality %></li>
+    <li>Birthday: <%= villager["birthday-string"] %></li>
+    <li>Species: <%= villager.species %> </li>
+    <li>Gender: <%= villager.gender %> </li>
+    <li>Catch phrase: <%= villager["catch-phrase"] %> </li>
+</ul>
+
+<%- include('../partials/header') %>
