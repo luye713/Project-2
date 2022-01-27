@@ -1,4 +1,5 @@
 <%- include('../partials/header') %>
+
 <h1><%= villager.name["name-USen"] %> </h1>
 <img src="<%= villager.image_uri %>" width=300 height=300>
 <ul>
@@ -9,4 +10,25 @@
     <li>Catch phrase: <%= villager["catch-phrase"] %> </li>
 </ul>
 
-<%- include('../partials/header') %>
+<h2>Comments:</h2>
+<form method="POST" action="/villagers/<%= villager.species %>/<%= villager.id %>">
+    <input type="text" name="comments">
+    <input type="submit" value="Add Comment">
+</form>
+
+<ul>
+    <% commentData.forEach(function(data) { %>
+        <li><%= data.comment.comments %> <%= data.user.name %>
+        
+            <form action="/villagers/<%= villager.species %>/<%= villager.id %>?_method=DELETE&comment=<%= data.comment.id %>" method="POST">
+                <% if ((user !== null) && (data.user.id === user.id)) { %>
+                    <!-- <%= console.log(data.user.id, "??????", user.id)  %>  -->
+                <button type="submit">Delete</button>
+                <a href="/villagers/<%= villager.species %>/<%= villager.id %>/<%= data.comment.id %>">Edit</a>
+            <% } %> 
+            </form>
+        </li>
+    <% }) %> 
+</ul>
+
+<%- include('../partials/footer') %>

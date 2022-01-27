@@ -1,36 +1,22 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('passport');
+
 
 const villagersCtrl = require('../controllers/villagers')
-
-
 
 /* GET home page. */
 router.get('/', villagersCtrl.index);
 router.get('/:id', villagersCtrl.show)
-router.get('/:id/:id', villagersCtrl.showOne)
+router.get('/:species/:id', villagersCtrl.showOne)
+router.post('/:id/:id', villagersCtrl.create)
+router.delete('/:id/:id', villagersCtrl.delete)
+router.get('/:id/:id/:comment', villagersCtrl.updateForm)
+router.put('/:id/:id/:comment', villagersCtrl.update)
 
+function isLoggedIn(req, res, next) {
+  if (req.isAuthenticated()) return next();
+  res.redirect('/auth/google');
+}
 
-
-
-  
-  router.get('/auth/google', passport.authenticate(
-    'google',
-    { scope: ['profile', 'email'] }
-  ));
-    
-  router.get('/oauth2callback', passport.authenticate(
-    'google',
-    {
-      successRedirect : '/users',
-      failureRedirect : '/users'
-    }
-  ));
-
-  router.get('/logout', function(req, res){
-    req.logout();
-    res.redirect('/users');
-  });
 
 module.exports = router;

@@ -1,0 +1,21 @@
+<%- include('../partials/header') %>
+
+<% for (let v in villagers) { %>
+    <img src="<%= villagers[v].icon_uri %>" width=100 height=100>
+    <% if (villagers[v].inDateBase) { %>
+        <div>
+            <a href="/villagers/<%= villagers[v].species %>/<%= villagers[v].id %>">
+                <div> <%= villagers[v].name["name-USen"] %> </div>
+            </a>
+        </div>
+    <% } else { %>
+        <div> <%= villagers[v].name["name-USen"] %> </div>
+        <form action="/villagers/<%=villagers[v].species%>/<%= villagers[v].id %>/new" method="POST">
+            <button>Add to Database</button>
+        </form>
+    <% } %>
+<% } %>
+
+
+
+<%- include('../partials/footer') %>

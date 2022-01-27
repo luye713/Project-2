@@ -1,37 +1,37 @@
 const Villager = require('../models/villager')
+const User = require('../models/user')
 const rootURL = 'https://acnhapi.com/v1/'
 const request = require('request');
+
+let user;
+let commentData;
 
 module.exports = {
     index,
     show,
-    showOne
+    showOne,
+    create,
+    delete: deleteOne,
+    updateForm,
+    update
+}
+
+
+function getUserStatus(incoming) {
+    if (incoming) return incoming;
+    else return null;
 }
 
 function index(req, res) {
-  
-    // const villager = req.query.villager
-    // if (!villager) {
-    //   res.render('index', { villagerData: null})
-    // } else {
-        // request(`${rootURL}villagers/`, function(err, response, body) {
-        //     //convert a json to javascriptss
-        //     const villagerData = JSON.parse(body);
-        //     // console.log(villagerData)
-            
-        //     res.render('villagers/villagers', { villagerData })
-            
-        // })
-        res.render('villagers/villagers')
-    }
-// }
-//default if GET for request.
-//body is what we get back from the api, the response.
-//this body is not a true json, it's just a response. we need to turn this reponse
-//into an object that javascript can use - dot notation in view etc..
-//json object is always "" keys.
+    user = getUserStatus(req.user);
+    res.render('villagers/villagers', { user })
+}
+
 
 function show(req, res) {
+
+    user = getUserStatus(req.user)
+
     request(`${rootURL}villagers/`, function(err, response, body) {
         //convert a json to javascriptss
         const villagerData = JSON.parse(body);
@@ -43,14 +43,123 @@ function show(req, res) {
         });
         const villagers = Object.fromEntries(filteredArr);
 
-        res.render('villagers/show', { villagers })
-        
+        res.render('villagers/show', { villagers, user })
     })
+
 }
 
-function showOne(req, res) {
-    request(`${rootURL}villagers/${req.params.id}`, function(err, response, body) {
-        const villager = JSON.parse(body)
-        res.render('villagers/showOne', { villager })
-    });
+async function showOne(req, res) {
+    console.log(req.params);
+    user = getUserStatus(req.user);
+    console.log("user in showOne controller is", user);
+    commentData = [];
+    let comments;
+    let villager = await Villager.find({ id: req.params.id} )
+        if (villager.length !== 0 ) {
+            villager = villager[0]
+            comments = villager.comments
+            if (comments.length !== 0) {
+                for (let i=0; i < comments.length; i++) {
+                    let foundUser = await User.findById(comments[i].user)
+                        commentData.push({ comment: comments[i], user: foundUser })
+                        if (i == comments.length-1) {
+                            // console.log(commentData, user)
+                            res.render('villagers/showOne', { villager, user, commentData})
+                        }
+                }
+            } else {
+                res.render('villagers/showOne', { villager, user, commentData})
+            }
+        } else {
+            request(`${rootURL}villagers/${req.params.id}`, function(err, response, body) {
+                const villager = JSON.parse(body)
+                const newVillager = new Villager(villager)
+                    newVillager.name = villager.name["name-USen"];
+                    newVillager.save();
+                    res.render('villagers/showOne', { villager, user, commentData})
+                })
+        }
+   
+}
+
+function create(req, res) {
+
+    user = getUserStatus(req.user);
+
+        if (user) {
+            Villager.find({ id: req.params.id }, function(err, villager) {
+                console.log("create comments", req.body)
+                villager = villager[0]
+
+                //duplicate villagers id
+                if (user.villagers)
+                console.log(user)
+                user.villagers.push(villager)
+                user.save()
+                console.log(user)
+
+                req.body.user = req.user._id
+                villager.comments.push(req.body)
+                villager.save(function(err) {
+                    res.redirect(`/villagers/${villager.species}/${villager.id}`)
+                })
+            })
+        } else {
+        Villager.find({ id: req.params.id }, function(err, villager) {
+            villager = villager[0]
+            res.redirect(`/villagers/${villager.species}/${villager.id}`)
+        })
+    }
+
+}
+
+function deleteOne(req, res) {
+    user = getUserStatus(req.user);
+    // console.log(req.query)
+    Villager.find({ id: req.params.id }, function(err, villager) {
+        villager = villager[0];
+        // console.log(villager.comments)
+        let comments = villager.comments;
+            for (let i=0; i < comments.length; i++) {
+                // if ((comments[i].user == user.id) && (req.query.comment == comments[i].id)) 
+                if (req.query.comment == comments[i].id) {
+                    console.log("before", comments)
+                    comments.splice(i, 1)
+                    //comments[i].comments=req.body.comments
+                   console.log("after", comments)
+                } 
+            }
+            villager.save(function(err) {
+                res.redirect(`/villagers/${villager.species}/${villager.id}`)    
+            })
+})
+}
+
+function updateForm(req, res) {
+    user = getUserStatus(req.user);
+    Villager.find({ id: req.params.id }, function(err, villager) {
+        villager = villager[0];
+        let comments = villager.comments;
+        comments.forEach(function(comment) {
+            if (req.params.comment == comment.id) {
+                let oldComment = comment;
+                res.render('villagers/comment', { user, villager, oldComment} )
+            }
+        })
+})
+}
+
+function update(req, res) {
+    Villager.find({ id: req.params.id }, function(err, villager) {
+        villager = villager[0];
+        let comments = villager.comments;
+        comments.forEach(function(comment) {
+            if (req.params.comment == comment.id) {
+                comment.comments = req.body.newComment          
+            }
+            })
+            villager.save(function(err) {
+                res.redirect(`/villagers/${villager.species}/${villager.id}`)  
+            })
+})
 }

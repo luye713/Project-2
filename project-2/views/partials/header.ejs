@@ -5,3 +5,21 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
+    <a href="/villagers">Home</a>
+
+
+    <a href="/users">
+    <% if (user) { %>
+      <%= user.name %>
+    <% } %>
+     </a>
+
+    <ul>
+      <li>
+      <% if (user) { %>
+        <a href="/logout">Log Out</a>
+      <% } else { %>
+        <a href="/auth/google">Login with Google</a>
+      <% } %>
+      </li>
+    </ul>

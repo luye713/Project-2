@@ -1,0 +1,11 @@
+<%- include('../partials/header') %>
+
+<h1><%=  user.name %> </h1>
+<div><%= oldComment.comments %> </div>
+
+<form action="/villagers/<%= villager.species %>/<%= villager.id %>/<%= oldComment.id %>?_method=PUT" method="POST">
+    <input type="text" name="newComment">
+    <input type="submit" value="Edit Comment">
+</form>
+
+<%- include('../partials/footer') %>
