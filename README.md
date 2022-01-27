@@ -1,8 +1,8 @@
 # Animal Crossing Guide
 GA Project Two
 
-##About
+## About
 
-##Features
+## Features
 
-##Technologies Used
+## Technologies Used
