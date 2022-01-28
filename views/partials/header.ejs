@@ -11,23 +11,23 @@
   <body>
     <header>
       <div id="header-wrapper">
-      <a href="/villagers"><h1>Animal Crossing Guide</h1></a>
-      <div id="user-wrapper">
-      <% if (user) { %>
-        <a href="/users" class="user-name">
-        Hi, <%= user.name %>
-        </a>
-      <% } %>
-  
-      <ul>
-        <li>
-        <% if (user) { %>
-          <a href="/logout" class="button">Log Out</a>
-        <% } else { %>
-          <a href="/auth/google" class="button">Login with Google</a>
-        <% } %>
-        </li>
-      </ul>
-    </div>
-    </div>
+        <a href="/villagers"><h1>Animal Crossing Guide</h1></a>
+        <div id="user-wrapper">
+          <% if (user) { %>
+            <a href="/users" class="user-name">
+            Hi, <%= user.name %>
+            </a>
+          <% } %>
+      
+          <ul>
+            <li>
+            <% if (user) { %>
+              <a href="/logout" class="button">Log Out</a>
+            <% } else { %>
+              <a href="/auth/google" class="button">Login with Google</a>
+            <% } %>
+            </li>
+          </ul>
+        </div>
+      </div>
     </header>

@@ -1,7 +1,5 @@
 const passport = require('passport');
-
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// new code below
 const User = require('../models/user');
 
 passport.use(new GoogleStrategy({
@@ -15,7 +13,6 @@ passport.use(new GoogleStrategy({
       if (user) {
         return cb(null, user);
       } else {
-        // we have a new student via OAuth!
         var newUser = new User({
           name: profile.displayName,
           email: profile.emails[0].value,

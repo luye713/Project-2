@@ -21,7 +21,7 @@ const villagerSchema = new Schema({
     comments: [commentSchema]
 }, {
     timestamps: true
-})
+});
 
 
 module.exports = mongoose.model('Villager', villagerSchema);
