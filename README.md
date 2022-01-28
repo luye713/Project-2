@@ -4,6 +4,9 @@ GA Project Two
 ## About
 Animal Crossing Guide is an unofficial guide for Nitendo's "Animal Crossing: New Horizons". This app provides a comprehensive information about the villagers.
 
+<img width="549" alt="Screen Shot 2022-01-27 at 9 30 59 PM" src="https://user-images.githubusercontent.com/95502987/151477029-aa0d52b1-07f2-4c84-bc3a-5fd8be05e7ae.png">
+
+
 ## Features
 * A complete list of 400+ villagers, including all their personality, birthday, and catch phrase.
 * Be able to login using Google account.
