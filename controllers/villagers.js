@@ -72,11 +72,14 @@ async function showOne(req, res) {
             }
         } else {
             request(`${rootURL}villagers/${req.params.id}`, function(err, response, body) {
-                const villager = JSON.parse(body)
-                const newVillager = new Villager(villager)
-                    newVillager.name = villager.name["name-USen"];
-                    newVillager.save();
-                    res.render('villagers/showOne', { villager, user, commentData})
+                const oldVillager = JSON.parse(body)
+                const villager = new Villager(oldVillager)
+                    villager.name = oldVillager.name["name-USen"];
+                    
+                    villager.save(function(err) {
+                        res.render('villagers/showOne', { villager, user, commentData})
+
+                    });
                 })
         }
    

@@ -3,23 +3,31 @@
   <head>
     <title>welcome</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500&display=swap" rel="stylesheet">
   </head>
   <body>
-    <a href="/villagers">Home</a>
-
-
-    <a href="/users">
-    <% if (user) { %>
-      <%= user.name %>
-    <% } %>
-     </a>
-
-    <ul>
-      <li>
+    <header>
+      <div id="header-wrapper">
+      <a href="/villagers"><h1>Animal Crossing Guide</h1></a>
+      <div id="user-wrapper">
       <% if (user) { %>
-        <a href="/logout">Log Out</a>
-      <% } else { %>
-        <a href="/auth/google">Login with Google</a>
+        <a href="/users" class="user-name">
+        Hi, <%= user.name %>
+        </a>
       <% } %>
-      </li>
-    </ul>
+  
+      <ul>
+        <li>
+        <% if (user) { %>
+          <a href="/logout" class="button">Log Out</a>
+        <% } else { %>
+          <a href="/auth/google" class="button">Login with Google</a>
+        <% } %>
+        </li>
+      </ul>
+    </div>
+    </div>
+    </header>

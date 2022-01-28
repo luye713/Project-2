@@ -1,8 +1,327 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0 0 500px 0;
+  margin: 0;
+  font-family: 'Rubik', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  background-image: url('../images/bkground.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-color: #f6eee1;
+  position: relative;
 }
 
 a {
-  color: #00B7FF;
+  color: rgb(43, 43, 43);
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+  background-color: rgba(255,255,255, .7);
+  align-items: center;
+}
+
+#header-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 20px;
+  width: 100%;
+  max-width: 1099px;
+  background-image: url('../images/isabelle.png');
+  background-repeat: no-repeat;
+  background-size: 105px;
+  background-position: 280px 11px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#user-wrapper {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+}
+
+ul,
+li {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1 {
+  font-family: 'Fredoka One', cursive;
+  font-weight: normal;
+  width: 250px;
+  color: #50bfa8;
+}
+
+h2 {
+  color: #49a593;
+  font-size: 20px;
+}
+
+.button {
+  font-size: 13px;
+  color: white;
+  background-color: #50bfa8;
+  cursor: pointer;
+  padding: 10px 20px;
+  border-radius: 20px;
+}
+
+.button:hover {
+  background-color: #49a593;
+  transition: all .15s;
+}
+
+#content {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1060px;
+  gap: 40px;
+  padding: 40px;
+  margin: auto;
+  justify-content: flex-start;
+}
+
+.v-species {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1 1 auto;
+  max-width: 70px;
+  text-align: center;
+  color: rgb(43, 43, 43);
+}
+
+.v-species:hover {
+  color: #50bfa8;
+  transform: scale(1.05);
+  transition: transform .1s;
+}
+
+.v-species:hover img {
+  filter: drop-shadow(0px 2px 2px rgba(167, 67, 0, 0.35));
+}
+
+.card {
+  background: #8fd6bb;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.card a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(43, 43, 43);
+}
+
+.card a img {
+  padding: 20px;
+}
+
+.card a div {
+  width: 100%;
+  text-align: center;
+  background: #fcfaf6;
+  padding: 10px;
+}
+
+.card:hover {
+  background: #88c9a1;
+  transform: scale(1.05);
+  transition: all .15s;
+}
+
+.card:hover a {
+  color: #50bfa8;
+  transition: all .15s;
+}
+
+/* Villager profile */
+
+#content.profile-page {
+  max-width: 800px;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.profile,
+.comments {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  border-radius: 25px;
+  overflow: hidden;
+  background: rgba(255,255,255, .7);
+}
+
+.profile h1 {
+  color: #49a593;
+  padding-left: 20px;
+}
+
+.profile ul {
+  display: flex;
+  gap: 10px;
+  color: rgb(43, 43, 43);
+  flex-direction: column;
+  padding: 0 20px;
+  margin-bottom: 30px;
+}
+
+.profile ul li span {
+  font-weight: 400;
+  width: 110px;
+  margin-right: 10px;
+}
+
+/* comments */
+
+.comments {
+  flex: 1 1 auto;
+  max-width: inherit;
+  padding: 20px 30px;
+}
+
+.comments .button {
+  border: none;
+  padding: 8px ​16px;
+}
+
+.comments ul {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+}
+
+.comments li {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  word-break: break-all;
+  margin-bottom: 30px;
+}
+
+.comment {
+  border: 1px solid #49a593;
+  padding: 10px 15px;
+  border-radius: 3px;
+  font-size: 13px;
+  box-shadow: 5px 5px 0px #ccc;
+}
+
+.user-name {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+}
+
+.pre-comment {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.pre-comment button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.pre-comment button,
+.pre-comment a {
+  font-weight: 100;
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  align-items: center;
+  padding: 5px 0;
+  margin-left: 10px;
+  color: #327a93;
+}
+
+.pre-comment button:hover,
+.pre-comment a:hover {
+  color: #000000;
+}
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+textarea {
+  resize: none;
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid #49a593;
+  border-radius: 3px;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 100;
+}
+
+/* Comment edit */
+#content.edit-page {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+#content.edit-page span {
+  line-height: 20px;
+}
+
+#content.edit-page .comment {
+  font-size: 16px;
+}
+
+.edit-form {
+  justify-content: center;
+}
+
+.edit-form .button {
+  border: none;
+  background-color: #ec7174;
+}
+
+.edit-form .button:hover {
+  background-color: #df5b5d;
+}
+
+
+/* User landing */
+
+#content.landing {
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.landing .button {
+  background: #ec7174;
+  padding: 12px 40px;
+}
+
+.landing .button:hover {
+  background: #df5b5d;
+}
+
+/* footer */
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  padding: 5px;
+  background: #327a93;
+  color: white;
+  text-align: center;
+  width: 100%;
+  font-size: 13px;
 }

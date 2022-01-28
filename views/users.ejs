@@ -1,9 +1,10 @@
 <%- include('./partials/header') %>
-
-    <h1><%= user.name %> </h1>
+  <div id="content" class="landing">
+    <h1>Welcome! <%= user.name %> </h1>
     <ul>
       <li><%= user.email %> </li>
     </ul>
-
+    <a href="/villagers" class="button">Find the villagers</a>
+  </div>
     
     <%- include('./partials/footer') %>

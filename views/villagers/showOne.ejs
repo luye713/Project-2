@@ -1,24 +1,25 @@
 <%- include('../partials/header') %>
+<div id="content" class="profile-page">
 
-<h1><%= villager.name["name-USen"] %> </h1>
+<div class="profile">
 <img src="<%= villager.image_uri %>" width=300 height=300>
+<h1> <%= villager.name %> </h1>
 <ul>
-    <li>Personality: <%= villager.personality %></li>
-    <li>Birthday: <%= villager["birthday-string"] %></li>
-    <li>Species: <%= villager.species %> </li>
-    <li>Gender: <%= villager.gender %> </li>
-    <li>Catch phrase: <%= villager["catch-phrase"] %> </li>
+    <li><span>Personality:</span> <%= villager.personality %></li>
+    <li><span>Birthday:</span> <%= villager["birthday-string"] %></li>
+    <li><span>Species:</span> <%= villager.species %> </li>
+    <li><span>Gender:</span> <%= villager.gender %> </li>
+    <li><span>Catch phrase:</span> <%= villager["catch-phrase"] %> </li>
 </ul>
+</div>
 
+<div class="comments">
 <h2>Comments:</h2>
-<form method="POST" action="/villagers/<%= villager.species %>/<%= villager.id %>">
-    <input type="text" name="comments">
-    <input type="submit" value="Add Comment">
-</form>
-
 <ul>
     <% commentData.forEach(function(data) { %>
-        <li><%= data.comment.comments %> <%= data.user.name %>
+        <li>
+            <div class="pre-comment">
+            <div class="user-name"><%= data.user.name %></div>
         
             <form action="/villagers/<%= villager.species %>/<%= villager.id %>?_method=DELETE&comment=<%= data.comment.id %>" method="POST">
                 <% if ((user !== null) && (data.user.id === user.id)) { %>
@@ -27,8 +28,18 @@
                 <a href="/villagers/<%= villager.species %>/<%= villager.id %>/<%= data.comment.id %>">Edit</a>
             <% } %> 
             </form>
+            </div>
+            <div class="comment">
+                <%= data.comment.comments %> 
+            </div>
         </li>
     <% }) %> 
 </ul>
 
+<form method="POST" action="/villagers/<%= villager.species %>/<%= villager.id %>">
+    <textarea type="text" name="comments" rows="4" cols="10"></textarea>
+    <input type="submit" class="button" value="Add Comment">
+</form>
+</div>
+</div>
 <%- include('../partials/footer') %>

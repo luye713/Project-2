@@ -1,7 +1,7 @@
 <%- include('../partials/header') %>
-
+<div id="content" >
 <% for (let v in villagers) { %>
-    <div>
+    <div class="card">
         <a href="/villagers/<%= villagers[v].species %>/<%= villagers[v].id %>">
             <img src="<%= villagers[v].icon_uri %>" width=100 height=100>
             <div> <%= villagers[v].name["name-USen"] %> </div>
@@ -9,7 +9,7 @@
         </a>
     </div> 
 <% } %>
-
+</div>
 
 
 <%- include('../partials/footer') %>

@@ -1,11 +1,13 @@
 <%- include('../partials/header') %>
 
-<h1><%=  user.name %> </h1>
-<div><%= oldComment.comments %> </div>
+<div id="content" class="edit-page">
+<span>Hi, <h1><%=  user.name %></h1> Please update your comments below!</span>
+<div class="comment"><%= oldComment.comments %> </div>
 
-<form action="/villagers/<%= villager.species %>/<%= villager.id %>/<%= oldComment.id %>?_method=PUT" method="POST">
-    <input type="text" name="newComment">
-    <input type="submit" value="Edit Comment">
+<form class="edit-form" action="/villagers/<%= villager.species %>/<%= villager.id %>/<%= oldComment.id %>?_method=PUT" method="POST">
+    <textarea type="text" name="newComment" rows="4" cols="20"></textarea>
+    <input class="button" type="submit" value="Edit Comment">
 </form>
+</div>
 
 <%- include('../partials/footer') %>
