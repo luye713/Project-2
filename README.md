@@ -20,8 +20,8 @@ Animal Crossing Guide is an unofficial guide for Nitendo's "Animal Crossing: New
 * HTML
 
 ## Links
-* My app: 
-* My Trello board:
+* My app: https://animal-crossing-guide.herokuapp.com/
+* My Trello board:https://trello.com/b/9AQrxOW2/project-2
 
 ## Next Steps
 * Be able to view all the comments one user left in the user information page.
